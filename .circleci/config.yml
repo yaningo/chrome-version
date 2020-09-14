@@ -1,0 +1,29 @@
+version: 2.1
+
+jobs:
+  ruby_2.6.5:
+    docker:
+      - image: circleci/ruby:2.6.5-stretch-node-browsers
+    steps:
+      - run:
+          command: |
+                   google-chrome --version
+                   
+  ruby_2.6.6:
+    docker:
+      - image: circleci/ruby:2.6.6-stretch-node-browsers
+    steps:
+      - run:
+          command: |
+                   google-chrome --version
+ 
+
+workflows:
+  version: 2
+  2.6.5:
+    jobs:
+      - ruby_2.6.5
+      
+  2.6.6:
+    jobs:
+      - ruby_2.6.6
