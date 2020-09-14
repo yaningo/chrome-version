@@ -8,6 +8,7 @@ jobs:
       - run:
           command: |
                    google-chrome --version
+                   sudo apt list --installed|grep -i driver
                    
   ruby_266:
     docker:
@@ -16,14 +17,8 @@ jobs:
       - run:
           command: |
                    google-chrome --version
-                   sudo apt list --installed|grep -i chrome
-                   sudo apt-get purge google-chrome-stable
-                   #sudo wget --no-verbose -O /tmp/chrome.deb http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_80.0.3987.149_amd64.deb
-                   #sudo apt install -y /tmp/chrome.deb && rm /tmp/chrome.deb
-                   sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-                   sudo apt-get update
-                   sudo apt-get install -y google-chrome-stable=80.0.3987.149 -- no-install-recommends
-
+                   sudo apt list --installed|grep -i driver
+                   
 workflows:
   build_and_test:
     jobs:
