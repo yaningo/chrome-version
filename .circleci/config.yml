@@ -3,10 +3,10 @@ version: 2.1
 jobs:
   build:
     machine: true
-  steps:
-    - run: |
-        sudo uname -a
-        sudo lsb_release -a
+    steps:
+      - run: |
+          sudo uname -a
+          sudo lsb_release -a
                    
 workflows:
   build_and_test:
