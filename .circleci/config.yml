@@ -9,6 +9,7 @@ jobs:
           command: |
                    google-chrome --version
                    chromedriver --version
+                   dockerize -wait tcp://localhost:9515 -timeout 1m
                    
   ruby_266:
     docker:
@@ -18,6 +19,7 @@ jobs:
           command: |
                    google-chrome --version
                    chromedriver --version
+                   dockerize -wait tcp://localhost:9515 -timeout 1m
                    
 workflows:
   build_and_test:
