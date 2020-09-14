@@ -9,24 +9,24 @@ jobs:
           command: |
                    google-chrome --version
                    
-      - run:
-          background: true
-          command: |
-                   sudo chromedriver
-                   
-      - run:
-          command: |
-                   dockerize -wait tcp://localhost:9515 -timeout 1m
+
                    
   ruby_266:
     docker:
       - image: circleci/ruby:2.6.6-stretch-node-browsers
     steps:
       - run:
+          background: true
           command: |
+                   sudo chromedriver
+                   
+
+      - run:
+          command: |
+                   dockerize -wait tcp://localhost:9515 -timeout 1m
                    google-chrome --version
                    chromedriver --version
-                   #dockerize -wait tcp://localhost:9515 -timeout 1m
+                   
                    
 workflows:
   build_and_test:
