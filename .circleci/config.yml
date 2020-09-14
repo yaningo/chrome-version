@@ -16,6 +16,7 @@ jobs:
       - run:
           command: |
                    google-chrome --version
+                   sudo apt list --installed|grep -i chrome
  
 
 workflows:
