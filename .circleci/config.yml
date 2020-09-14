@@ -1,35 +1,14 @@
 version: 2.1
 
 jobs:
-  ruby_265:
-    docker:
-      - image: circleci/ruby:2.6.5-stretch-node-browsers
-    steps:
-      - run:
-          command: |
-                   google-chrome --version
-                   
-      - run:
-          background: true
-          command: |
-                   sudo chromedriver
-                   
-      - run:
-          command: |
-                   dockerize -wait tcp://localhost:9515 -timeout 1m
-                   
-  ruby_266:
-    docker:
-      - image: circleci/ruby:2.6.6-stretch-node-browsers
-    steps:
-      - run:
-          command: |
-                   google-chrome --version
-                   chromedriver --version
-                   #dockerize -wait tcp://localhost:9515 -timeout 1m
+  build:
+    machine: true
+  steps:
+    - run: |
+        sudo uname -a
+        sudo lsb_release -a
                    
 workflows:
   build_and_test:
     jobs:
-      - ruby_265
-      - ruby_266
+      - build
