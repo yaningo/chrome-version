@@ -18,7 +18,7 @@ jobs:
                    google-chrome --version
                    sudo apt list --installed|grep -i chrome
                    sudo apt-get purge google-chrome-stable
-                   sudo wget --no-verbose -O /tmp/chrome.deb http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${80.0.3987.149}_amd64.deb
+                   sudo wget --no-verbose -O /tmp/chrome.deb http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_80.0.3987.149_amd64.deb
                    sudo apt install -y /tmp/chrome.deb && rm /tmp/chrome.deb 
 
 workflows:
