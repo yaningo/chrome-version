@@ -17,6 +17,8 @@ jobs:
           command: |
                    google-chrome --version
                    sudo apt list --installed|grep -i chrome
+                   sudo apt-get purge google-chrome-stable
+                   sudo apt-cache search google-chrome
  
 
 workflows:
