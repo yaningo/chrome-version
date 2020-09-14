@@ -20,10 +20,6 @@ jobs:
 
 workflows:
   version: 2
-  265:
     jobs:
       - ruby_265
-      
-  266:
-    jobs:
       - ruby_266
