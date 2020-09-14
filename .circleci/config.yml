@@ -8,7 +8,14 @@ jobs:
       - run:
           command: |
                    google-chrome --version
+                   
+      - run:
+          background: true
+          command: |
                    sudo chromedriver
+                   
+      - run:
+          command: |
                    dockerize -wait tcp://localhost:9515 -timeout 1m
                    
   ruby_266:
