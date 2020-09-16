@@ -8,15 +8,15 @@ jobs:
       - run:
           name: Install OpenJDK 14
           command: |
-            sudo mkdir /opt/jdk
+            #sudo mkdir /opt/jdk
             wget https://download.java.net/java/GA/jdk14.0.2/205943a0976c4ed48cb16f1043c5c647/12/GPL/openjdk-14.0.2_linux-x64_bin.tar.gz
-            sudo tar -zxvf openjdk-14.0.2_linux-x64_bin.tar.gz -C /opt/jdk
-            sudo update-alternatives --install /usr/bin/java java /opt/jdk/jdk-14.0.2/bin/java 100
-            sudo update-alternatives --install /usr/bin/jar jar /opt/jdk/jdk-14.0.2/bin/jar 100
-            sudo update-alternatives --install /usr/bin/javac javac /opt/jdk/jdk-14.0.2/bin/javac 100
-            sudo update-alternatives --set java /opt/jdk/jdk-14.0.2/bin/java
-            sudo update-alternatives --set jar /opt/jdk/jdk-14.0.2/bin/jar
-            sudo update-alternatives --set javac /opt/jdk/jdk-14.0.2/bin/javac
+            sudo tar -zxvf openjdk-14.0.2_linux-x64_bin.tar.gz -C /usr/lib/jvm
+            sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-14.0.2/bin/java 100
+            sudo update-alternatives --install /usr/bin/jar jar /usr/lib/jvm/jdk-14.0.2/bin/jar 100
+            sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk-14.0.2/bin/javac 100
+            sudo update-alternatives --set java /usr/lib/jvm/jdk-14.0.2/bin/java
+            sudo update-alternatives --set jar /usr/lib/jvm/jdk-14.0.2/bin/jar
+            sudo update-alternatives --set javac /usr/lib/jvm/jdk-14.0.2/bin/javac
             java -version
             sudo update-alternatives --config java
 
