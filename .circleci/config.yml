@@ -9,7 +9,7 @@ jobs:
           name: Install OpenJDK 14
           command: |
             sudo apt-get update
-            sudo apt-get install openjdk-14-jdk
+            sudo apt-cache search openjdk
                    
 workflows:
   build_and_test:
