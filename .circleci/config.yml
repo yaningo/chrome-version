@@ -13,8 +13,8 @@ jobs:
             sudo tar -zxvf openjdk-14.0.2_linux-x64_bin.tar.gz
             sudo update-alternatives --install /usr/bin/java java /home/circleci/project/jdk-14.0.2/bin/java 100
             sudo update-alternatives --install /usr/bin/javac javac /home/circleci/project/jdk-14.0.2/bin/javac 100
-            sudo update-alternatives --config java
-            sudo update-alternatives --set java /home/circleci/project/jdk-14.0.2/bin/java
+            #sudo update-alternatives --config java
+            #sudo update-alternatives --set java /home/circleci/project/jdk-14.0.2/bin/java
             sudo update-alternatives --set javac /home/circleci/project/jdk-14.0.2/bin/javac
             java -version
                    
