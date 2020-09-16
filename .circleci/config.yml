@@ -4,9 +4,10 @@ jobs:
   build:
     machine:
       image: ubuntu-1604:202007-01
-    steps:
-      name: Install OpenJDK 14
-        - run: |
+    steps:    
+      - run:
+          name: Install OpenJDK 14
+          command:|
             sudo apt-get update
             sudo apt-get install openjdk-14-jdk
                    
