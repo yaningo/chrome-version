@@ -2,11 +2,13 @@ version: 2.1
 
 jobs:
   build:
-    machine: true
+    machine:
+      image: ubuntu-1604:202007-01
     steps:
-      - run: |
-          sudo uname -a
-          sudo lsb_release -a
+      name: Install OpenJDK 14
+        - run: |
+            sudo apt-get update
+            sudo apt-get install openjdk-14-jdk
                    
 workflows:
   build_and_test:
