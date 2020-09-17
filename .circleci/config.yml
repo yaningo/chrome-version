@@ -1,35 +1,30 @@
 version: 2.1
 
+commands:
+  sayhello:
+    description: "A very simple command for demonstration purposes"
+    parameters:
+      to:
+        type: string
+        default: "World"
+    steps:
+      - run: echo Hello << parameters.to >>
+
 jobs:
-  ruby_265:
+  myjob:
     docker:
-      - image: circleci/ruby:2.6.5-stretch-node-browsers
+      - image: "cimg/base:stable"
     steps:
-      - run:
-          command: |
-                   google-chrome --version
-                   
+      - sayhello: # invoke command "sayhello"
 
-                   
-  ruby_266:
-    docker:
-      - image: circleci/ruby:2.6.6-stretch-node-browsers
-    steps:
-      - run:
-          background: true
-          command: |
-                   sudo chromedriver
-                   
-
-      - run:
-          command: |
-                   dockerize -wait tcp://localhost:9515 -timeout 1m
-                   google-chrome --version
-                   chromedriver --version
-                   
-                   
 workflows:
-  build_and_test:
+  build-toto:
     jobs:
-      - ruby_265
-      - ruby_266
+      - myjob:
+          to: Toto
+          
+  build-titi:
+    jobs:
+      - myjob:
+          to: Titi
+      
