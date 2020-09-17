@@ -16,6 +16,7 @@ jobs:
       - image: "cimg/base:stable"
     steps:
       - sayhello: # invoke command "sayhello"
+          to: << parameters.to >>
 
 workflows:
   build-toto:
