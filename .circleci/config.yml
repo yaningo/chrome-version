@@ -11,6 +11,11 @@ commands:
           name: sayhello << parameters.to >>
           command: |
             echo Hello << parameters.to >>
+            
+      - run:
+          name: Bien << parameters.to >>
+          command: |
+            echo Alors << parameters.to >>
 
 jobs:
   myjob:
