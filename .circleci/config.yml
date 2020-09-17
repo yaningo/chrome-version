@@ -6,12 +6,15 @@ commands:
     parameters:
       to:
         type: string
-        default: "World"
     steps:
       - run: echo Hello << parameters.to >>
 
 jobs:
   myjob:
+    parameters:
+      to:
+        description: "To whom shall we say hello?"
+        type: string
     docker:
       - image: "cimg/base:stable"
     steps:
