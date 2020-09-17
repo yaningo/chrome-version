@@ -9,7 +9,6 @@ jobs:
           command: |
                    google-chrome --version
                    
-
                    
   ruby_266:
     docker:
@@ -20,7 +19,6 @@ jobs:
           command: |
                    sudo chromedriver
                    
-
       - run:
           command: |
                    dockerize -wait tcp://localhost:9515 -timeout 1m
