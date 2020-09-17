@@ -7,7 +7,10 @@ commands:
       to:
         type: string
     steps:
-      - run: echo Hello << parameters.to >>
+      - run:
+          name: sayhello << parameters.to >>
+          command: |
+            echo Hello << parameters.to >>
 
 jobs:
   myjob:
