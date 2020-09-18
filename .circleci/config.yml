@@ -3,7 +3,7 @@ version: 2
 jobs:
   ruby_265:
     docker:
-      - image: circleci/ruby:2.6.5-stretch-node-browsers
+    - image: circleci/ruby:2.6.5-stretch-node-browsers
     steps:
       - run:
           command: |
@@ -13,7 +13,7 @@ jobs:
                    
   ruby_266:
     docker:
-      - image: circleci/ruby:2.6.6-stretch-node-browsers
+    - image: circleci/ruby:2.6.6-stretch-node-browsers
     steps:
       - run:
           background: true
