@@ -8,7 +8,8 @@ jobs:
       - run:
           name: Install OpenJDK 11
           command: |
-            sudo apt-get update && apt-cache search jdk
+            sudo apt-get update && apt-get install openjdk-11-jdk
+            java -version
 
                    
 workflows:
