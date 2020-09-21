@@ -1,29 +1,28 @@
 version: 2.1
 
+parameters:
+  github:
+    type: boolean
+    default: true
 jobs:
   build-and-upload:
     machine: true
-    parameters:
-      github:
-        type: boolean
-        default: true
     steps:
-      - run: echo << parameters.github >>
+      - run: echo << pipeline.parameters.github >>
                    
 workflows:
-  main:
+  main-1:
+    when: equal [ true, << pipeline.parameters.github >> ]
     jobs:
       # Run job when this is merge to master
       - build-and-upload:
           context: bré
-          github: true
-          filters:
-            branches:
-              only:
-                - master
+ 
+  main-2:
+    when:  equal [ false, << pipeline.parameters.github >> ]
+    jobs:
       # Run job when this is an API call from CD service
       - build-and-upload:
           context:
              - bré
              - toto
-          github: false
