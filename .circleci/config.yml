@@ -17,6 +17,7 @@ jobs:
     steps:
       - run:
           background: true
+          name: Launching ChromeDriver
           command: |
                    sudo chromedriver
                    
