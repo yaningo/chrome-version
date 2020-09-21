@@ -1,14 +1,28 @@
 version: 2.1
 
 jobs:
-  build:
+  build-and-upload:
     machine: true
+    parameters:
+      github:
+        type: boolean
     steps:
-      - run: |
-          sudo uname -a
-          sudo lsb_release -a
+      - run: echo << parameters.github >>
                    
 workflows:
-  build_and_test:
+  main:
     jobs:
-      - build
+      # Run job when this is merge to master
+      - build-and-upload:
+          context: bré
+          github: true
+          filters:
+            branches:
+              only:
+                - master
+      # Run job when this is an API call from CD service
+      - build-and-upload:
+          context:
+             - bré
+             - toto
+          github: false
