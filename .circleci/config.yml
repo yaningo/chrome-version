@@ -56,7 +56,7 @@ workflows:
             branches:
               only:
                 - master
-      # Run job when this is an API call from CD service
+      # Run le job when this is an API call from CD service
       - build-and-upload:
           context:
              - bré
