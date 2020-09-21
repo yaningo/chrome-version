@@ -6,6 +6,7 @@ jobs:
     parameters:
       github:
         type: boolean
+        default: true
     steps:
       - run: echo << parameters.github >>
                    
