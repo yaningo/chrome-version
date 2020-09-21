@@ -18,8 +18,7 @@ jobs:
       - run:
           background: true
           name: Launching ChromeDriver
-          command: |
-                   sudo chromedriver
+          command: chromedriver
                    
       - run:
           command: |
