@@ -9,7 +9,7 @@ jobs:
         type: boolean
     steps:
       - run:
-          command:|
+          command: |
             echo << parameters.github >>
             echo ${bre_var}
             echo ${toto_var}
