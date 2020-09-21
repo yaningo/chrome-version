@@ -19,7 +19,7 @@ workflows:
           context: bré
  
   main-2:
-    when:  equal [ false, << pipeline.parameters.github >> ]
+    when: equal [ false, << pipeline.parameters.github >> ]
     jobs:
       # Run job when this is an API call from CD service
       - build-and-upload:
