@@ -1,5 +1,18 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-
+# Use a package of configuration called an orb.
+orbs:
+  lambda: crunchyroll/lambda@volatile
+parameters:
+  manual_trigger:
+    type: boolean
+    default: false
+  service_name:
+    type: string
+    default: "lambda-test-lambda"
+  is_edge:
+    type: boolean
+    default: false
 jobs:
   build-and-upload:
     machine:
@@ -8,23 +21,44 @@ jobs:
       github:
         type: boolean
     steps:
-      - run: echo << parameters.github >>
-                   
+      - checkout
+      - run: "make all"
+      - run: "mkdir circleci-uploads"
+      - run: "mv release/lambda-test-lambda.py.zip circleci-uploads/"
+      # Upload Lambda if merge to master
+      - lambda/upload-by-github:
+          github_merge: << parameters.github >>
+          is_edge: << pipeline.parameters.is_edge >>
+          service_name: << pipeline.parameters.service_name >>
+      - lambda/deploy:
+          github_merge: << parameters.github >>
+          service_name: << pipeline.parameters.service_name >>
+      # Upload Lambda if API call from CD service
+      - lambda/upload-by-cd:
+          manual_trigger: << pipeline.parameters.manual_trigger >>
+          is_edge: << pipeline.parameters.is_edge >>
+          service_name: << pipeline.parameters.service_name >>
+      - run:
+          name: Call the Jenkins job
+          command: |
+            set +e
+            curl -X POST -f --user ${USER}:${TOKEN} https://jenkins-build.ellationeng.cx-mgmt.com/job/<< pipeline.parameters.service_name >>-pipeline-staging/build
+            echo "export JOB_EXISTS=$?" >> ${BASH_ENV}
+
 workflows:
   main:
     jobs:
       # Run job when this is merge to master
       - build-and-upload:
-          github: true
           context: bré
+          github: true
           filters:
             branches:
               only:
                 - master
-
       # Run job when this is an API call from CD service
       - build-and-upload:
-          github: false
           context:
              - bré
              - toto
+          github: false
