@@ -8,7 +8,11 @@ jobs:
       github:
         type: boolean
     steps:
-      - run: echo << parameters.github >>
+      - run:
+          command:|
+            echo << parameters.github >>
+            echo $bre_var
+            echo $toto_var
                    
 workflows:
   main:
