@@ -31,13 +31,11 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - ruby_265
-          
       - holdup: # <<< A job that will require manual approval in the CircleCI web application.
           type: approval
+      - ruby_265:
           requires:
-            - ruby_265
-      
-      - ruby_266
+            - holdup
+      - ruby_266:
           requires:
             - holdup
