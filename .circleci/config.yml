@@ -33,6 +33,6 @@ workflows:
     jobs:
       - ruby_265
       
-  build_265:
+  build_266:
     jobs:
       - ruby_266
