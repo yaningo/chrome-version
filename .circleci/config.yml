@@ -2,15 +2,21 @@ version: 2.1
 
 jobs:
   build:
-    machine:
-      image: ubuntu-2004:202008-01
+    docker:
+      - image: circleci/python:latest
     steps:    
       - run:
-          name: Check OpenJDK version
+          name: Do something
           command: |
-            java -version
+            ls -al
 
 workflows:
   build_and_test:
     jobs:
-      - build
+      - build:
+          post-steps:
+            - run:
+                name: Determine job duration
+                command: |
+                    echo $CIRCLE_BUILD_NUM
+                    curl -G "https://circleci.com/api/v2/project/gh/yaningo/chrome-version/job/${CIRCLE_BUILD_NUM}" -H "Circle-Token: ${MyToken}" |jq -s '.[] |.duration'
