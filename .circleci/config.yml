@@ -15,6 +15,13 @@ jobs:
   ruby_265:
     docker:
       - image: circleci/ruby:2.6.5-stretch-node-browsers
+    parameters:
+      autre_wf:
+        type: string
+        default: blue
+      token:
+        type: string
+        default: blue
     steps:
       - run:
           command: |
@@ -30,6 +37,13 @@ jobs:
   ruby_266:
     docker:
       - image: circleci/ruby:2.6.6-stretch-node-browsers
+    parameters:
+      autre_wf_2:
+        type: string
+        default: blue
+      token:
+        type: string
+        default: blue
     steps:
       - run:
           background: true
