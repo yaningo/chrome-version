@@ -43,7 +43,7 @@ workflows:
   build_266:
     jobs:
       - ruby_266
-      - hold265: # <<< A job that will require manual approval in the CircleCI web application.
+      - hold266: # <<< A job that will require manual approval in the CircleCI web application.
           type: approval
           post-steps:
             - run:
