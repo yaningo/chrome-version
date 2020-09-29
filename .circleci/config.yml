@@ -9,7 +9,6 @@ jobs:
           name: Do something
           command: |
             ls -al
-            sudo apt-get install jq
 
 workflows:
   build_and_test:
@@ -17,7 +16,7 @@ workflows:
       - build:
           post-steps:
             - run:
-                name: Determine job duration
+                name: Get job duration
                 command: |
                     echo $CIRCLE_BUILD_NUM
                     #curl -G "https://circleci.com/api/v2/project/gh/yaningo/chrome-version/job/$CIRCLE_BUILD_NUM" -H "Circle-Token: $MyToken" |jq -s '.[] |.duration'
