@@ -1,15 +1,4 @@
 version: 2.1
-
-parameters:
-  autre_wf:
-    type: string
-    default: blue
-  autre_wf_2:
-    type: string
-    default: blue
-  token:
-    type: string
-    default: blue
       
 jobs:   
   ruby_265:
