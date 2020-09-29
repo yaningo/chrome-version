@@ -9,6 +9,7 @@ jobs:
           command: |
                    google-chrome --version
                    #dockerize -wait tcp://localhost:9515 -timeout 1m
+                   curl -G 'https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow' -H 'Circle-Token: $MyToken'|jq -s --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id'
                    
                    
   ruby_266:
@@ -24,6 +25,7 @@ jobs:
           command: |
                    dockerize -wait tcp://localhost:9515 -timeout 1m
                    google-chrome --version
+                   curl -G 'https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow' -H 'Circle-Token: $MyToken'|jq -s --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id'
                    
                    
 workflows:
