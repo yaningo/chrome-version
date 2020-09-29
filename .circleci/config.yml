@@ -27,7 +27,7 @@ jobs:
     docker:
       - image: circleci/ruby:2.6.6-stretch-node-browsers
   parameters:
-    autre_wf:
+    autre_wf_2:
       type: string
       default: blue
     token:
