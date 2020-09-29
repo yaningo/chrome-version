@@ -11,6 +11,7 @@ jobs:
                    #dockerize -wait tcp://localhost:9515 -timeout 1m
                    sleep 10
                    autre_wf=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -s --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
+                   echo $autre_wf
                    curl -G "https://circleci.com/api/v2/workflow/$autre_wf" -H "Circle-Token: $MyToken" | jq -s
                    
                    
@@ -29,6 +30,7 @@ jobs:
                    google-chrome --version
                    sleep 10
                    autre_wf_2=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -s --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
+                   echo $autre_wf_2
                    curl -G "https://circleci.com/api/v2/workflow/${autre_wf_2}" -H "Circle-Token: $MyToken" | jq -s
                    
                    
