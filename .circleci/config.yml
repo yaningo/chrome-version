@@ -1,38 +1,37 @@
 version: 2.1
+
+parameters:
+  autre_wf:
+    type: string
+    default: blue
+  autre_wf_2:
+      type: string
+      default: blue
+  token:
+    type: string
+    default: blue
       
 jobs:   
   ruby_265:
     docker:
       - image: circleci/ruby:2.6.5-stretch-node-browsers
-  parameters:
-    autre_wf:
-      type: string
-      default: blue
-    token:
-      type: string
-      default: blue
+  
     steps:
       - run:
           command: |
                    google-chrome --version
                    #dockerize -wait tcp://localhost:9515 -timeout 1m
                    sleep 10
-                   parameters.autre_wf=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
-                   echo << parameters.autre_wf >>
-                   parameters.token=$MyToken
-                   curl -G "https://circleci.com/api/v2/workflow/<< parameters.autre_wf >>" -H "Circle-Token: << parameters.token >>" | jq -s
+                   pipeline.parameters.autre_wf=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
+                   echo << pipeline.parameters.autre_wf >>
+                   pipeline.parameters.token=$MyToken
+                   curl -G "https://circleci.com/api/v2/workflow/<< pipeline.parameters.autre_wf >>" -H "Circle-Token: << pipeline.parameters.token >>" | jq -s
                    
                    
   ruby_266:
     docker:
       - image: circleci/ruby:2.6.6-stretch-node-browsers
-  parameters:
-    autre_wf_2:
-      type: string
-      default: blue
-    token:
-      type: string
-      default: blue
+
     steps:
       - run:
           background: true
@@ -44,10 +43,10 @@ jobs:
                    dockerize -wait tcp://localhost:9515 -timeout 1m
                    google-chrome --version
                    sleep 10
-                   parameters.autre_wf_2=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
-                   echo << parameters.autre_wf_2 >>
-                   parameters.token=$MyToken
-                   curl -G "https://circleci.com/api/v2/workflow/<< parameters.autre_wf_2 >>" -H "Circle-Token: $MyToken" | jq -s
+                   pipeline.parameters.autre_wf_2=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
+                   echo << pipeline.parameters.autre_wf_2 >>
+                   pipeline.parameters.token=$MyToken
+                   curl -G "https://circleci.com/api/v2/workflow/<< pipeline.parameters.autre_wf_2 >>" -H "Circle-Token: $MyToken" | jq -s
                    
                    
 workflows:
@@ -64,7 +63,7 @@ workflows:
                 name: Cancel the other "on_hold_workflow"
                 command: |
                     #echo "export other_on_hold_id=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.status == "on_hold")|select(.id != $CIRCLE_WORKFLOW_ID)|.id')" >> $BASH_ENV
-                    curl -X POST "https://circleci.com/api/v2/workflow/<<parameters.autre_wf>>/cancel" -H "Circle-Token: <<parameters.token>>"
+                    curl -X POST "https://circleci.com/api/v2/workflow/<<pipeline.parameters.autre_wf>>/cancel" -H "Circle-Token: <<parameters.token>>"
       
   build_266:
     jobs:
@@ -78,4 +77,4 @@ workflows:
                 name: Cancel the other "on_hold_workflow"
                 command: |
                     #echo "export other_on_hold_id=$(curl --G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.status == "on_hold")|select(.id != $CIRCLE_WORKFLOW_ID)|.id')" >> $BASH_ENV
-                    curl -X POST "https://circleci.com/api/v2/workflow/<<parameters.autre_wf_2>>/cancel" -H "Circle-Token: <<parameters.token>>"
+                    curl -X POST "https://circleci.com/api/v2/workflow/<<pipeline.parameters.autre_wf_2>>/cancel" -H "Circle-Token: <<pipeline.parameters.token>>"
