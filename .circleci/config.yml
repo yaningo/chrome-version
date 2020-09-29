@@ -63,7 +63,7 @@ workflows:
                 name: Cancel the other "on_hold_workflow"
                 command: |
                     #echo "export other_on_hold_id=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.status == "on_hold")|select(.id != $CIRCLE_WORKFLOW_ID)|.id')" >> $BASH_ENV
-                    curl -X POST "https://circleci.com/api/v2/workflow/<<pipeline.parameters.autre_wf>>/cancel" -H "Circle-Token: <<parameters.token>>"
+                    curl -X POST "https://circleci.com/api/v2/workflow/<<pipeline.parameters.autre_wf>>/cancel" -H "Circle-Token: <<pipeline.parameters.token>>"
       
   build_266:
     jobs:
