@@ -4,13 +4,13 @@ jobs:
   parameters:
     autre_wf:
       type: string
-      default: blue
+      default: "blue"
     autre_wf_2:
       type: string
-      default: blue
+      default: "blue"
     token:
       type: string
-      default: blue
+      default: "blue"
       
   ruby_265:
     docker:
@@ -24,7 +24,7 @@ jobs:
                    parameters.autre_wf=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
                    echo << parameters.autre_wf >>
                    parameters.token=$MyToken
-                   curl -G "https://circleci.com/api/v2/workflow/<< parameters.autre_wf >>" -H "Circle-Token: $MyToken" | jq -s
+                   curl -G "https://circleci.com/api/v2/workflow/<<parameters.autre_wf>>" -H "Circle-Token: <<parameters.token>>" | jq -s
                    
                    
   ruby_266:
@@ -43,7 +43,7 @@ jobs:
                    sleep 10
                    parameters.autre_wf_2=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
                    echo << parameters.autre_wf_2 >>
-                   $MyToken
+                   parameters.token=$MyToken
                    curl -G "https://circleci.com/api/v2/workflow/<< parameters.autre_wf_2 >>" -H "Circle-Token: $MyToken" | jq -s
                    
                    
