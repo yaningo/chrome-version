@@ -1,16 +1,17 @@
 version: 2.1
 
 jobs:
-  parameters:
-    autre_wf:
-      type: string
-      default: "blue"
-    autre_wf_2:
-      type: string
-      default: "blue"
-    token:
-      type: string
-      default: "blue"
+parameters:
+  autre_wf:
+    type: string
+    default: blue
+  autre_wf_2:
+    type: string
+    default: blue
+  token:
+    type: string
+    default: blue
+      
       
   ruby_265:
     docker:
@@ -24,7 +25,7 @@ jobs:
                    parameters.autre_wf=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
                    echo << parameters.autre_wf >>
                    parameters.token=$MyToken
-                   curl -G "https://circleci.com/api/v2/workflow/<<parameters.autre_wf>>" -H "Circle-Token: <<parameters.token>>" | jq -s
+                   curl -G "https://circleci.com/api/v2/workflow/<< parameters.autre_wf >>" -H "Circle-Token: << parameters.token >>" | jq -s
                    
                    
   ruby_266:
