@@ -17,5 +17,5 @@ workflows:
                 name: Determine job duration
                 command: |
                     echo $CIRCLE_BUILD_NUM
-                    duration_ms=$(curl --location --request GET "https://circleci.com/api/v2/project/gh/yaningo/chrome-version/$CIRCLE_BUILD_NUM" --header "Circle-Token: a5c83c30b32428e6e4df9968f089ad03a05c2ada" |jq -s '.[] |.duration')
-                    echo $duration_ms
+                    #curl -G "https://circleci.com/api/v2/project/gh/yaningo/chrome-version/$CIRCLE_BUILD_NUM" -H "Circle-Token: $MyToken" |jq -s '.[] |.duration'
+                    curl -G "https://circleci.com/api/v2/project/gh/yaningo/chrome-version/$CIRCLE_BUILD_NUM" -H "Circle-Token: $MyToken"
