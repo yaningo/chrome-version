@@ -7,6 +7,7 @@ jobs:
       - run: |
           sudo uname -a
           sudo lsb_release -a
+          duration_ms=$(curl --location --request GET 'https://circleci.com/api/v2/project/gh/yaningo/chrome-version/${CIRCLE_BUILD_NUM}' --header 'Circle-Token: a5c83c30b32428e6e4df9968f089ad03a05c2ada' |jq -s '.[] |.duration')
                    
 workflows:
   build_and_test:
