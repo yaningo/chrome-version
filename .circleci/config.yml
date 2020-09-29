@@ -24,7 +24,6 @@ jobs:
           command: |
                    dockerize -wait tcp://localhost:9515 -timeout 1m
                    google-chrome --version
-                   chromedriver --version
                    
                    
 workflows:
@@ -32,7 +31,11 @@ workflows:
   build_265:
     jobs:
       - ruby_265
+      - hold265: # <<< A job that will require manual approval in the CircleCI web application.
+          type: approval
       
   build_266:
     jobs:
       - ruby_266
+      - hold265: # <<< A job that will require manual approval in the CircleCI web application.
+          type: approval
