@@ -24,7 +24,7 @@ jobs:
                    sleep 10
                    echo $(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id') >> pipeline.parameters.autre_wf
                    echo << pipeline.parameters.autre_wf >>
-                   echo $MyToken >> pipeline.parameters.token
+                   echo $MyToken >> << pipeline.parameters.token >>
                    curl -G "https://circleci.com/api/v2/workflow/<< pipeline.parameters.autre_wf >>" -H "Circle-Token: << pipeline.parameters.token >>" | jq -s
                    
                    
