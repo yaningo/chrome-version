@@ -1,20 +1,17 @@
 version: 2.1
 
-
+parameters:
+  autre_wf:
+    type: string
+    default: blue
+  autre_wf_2:
+    type: string
+    default: blue
+  token:
+    type: string
+    default: blue
       
-jobs:
-  parameters:
-    org_name:
-      type: string
-      default: my_org
-    repo_name:
-      type: string
-      default: my_repo
-  my_job:
-    docker:
-      - circleci/node:12.15.0
-    working_directory: /go/src/github.com/<< parameters.org_name >>/<< parameters.repo_name >>
-      
+jobs:   
   ruby_265:
     docker:
       - image: circleci/ruby:2.6.5-stretch-node-browsers
