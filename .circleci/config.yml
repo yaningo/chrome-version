@@ -9,6 +9,7 @@ jobs:
           name: Do something
           command: |
             ls -al
+            sudo apt-get install jq
 
 workflows:
   build_and_test:
