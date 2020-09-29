@@ -22,9 +22,9 @@ jobs:
                    google-chrome --version
                    #dockerize -wait tcp://localhost:9515 -timeout 1m
                    sleep 10
-                   pipeline.parameters.autre_wf=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
+                   echo $(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id') >> pipeline.parameters.autre_wf
                    echo << pipeline.parameters.autre_wf >>
-                   pipeline.parameters.token=$MyToken
+                   echo $MyToken >> pipeline.parameters.token
                    curl -G "https://circleci.com/api/v2/workflow/<< pipeline.parameters.autre_wf >>" -H "Circle-Token: << pipeline.parameters.token >>" | jq -s
                    
                    
@@ -43,9 +43,9 @@ jobs:
                    dockerize -wait tcp://localhost:9515 -timeout 1m
                    google-chrome --version
                    sleep 10
-                   pipeline.parameters.autre_wf_2=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
+                   echo $(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id') >> pipeline.parameters.autre_wf_2
                    echo << pipeline.parameters.autre_wf_2 >>
-                   pipeline.parameters.token=$MyToken
+                   echo $MyToken >> pipeline.parameters.token
                    curl -G "https://circleci.com/api/v2/workflow/<< pipeline.parameters.autre_wf_2 >>" -H "Circle-Token: $MyToken" | jq -s
                    
                    
