@@ -9,6 +9,7 @@ jobs:
           command: |
                    google-chrome --version
                    #dockerize -wait tcp://localhost:9515 -timeout 1m
+                   sleep 10
                    curl -G 'https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow' -H 'Circle-Token: $MyToken'|jq -s --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id'
                    
                    
@@ -25,6 +26,7 @@ jobs:
           command: |
                    dockerize -wait tcp://localhost:9515 -timeout 1m
                    google-chrome --version
+                   sleep 10
                    curl -G 'https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow' -H 'Circle-Token: $MyToken'|jq -s --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id'
                    
                    
@@ -35,6 +37,8 @@ workflows:
       - ruby_265
       - hold265: # <<< A job that will require manual approval in the CircleCI web application.
           type: approval
+          requires:
+            - ruby_265
           post-steps:
             - run:
                 name: Cancel the other "on_hold_workflow"
@@ -48,6 +52,8 @@ workflows:
       - ruby_266
       - hold266: # <<< A job that will require manual approval in the CircleCI web application.
           type: approval
+          requires:
+            - ruby_266
           post-steps:
             - run:
                 name: Cancel the other "on_hold_workflow"
