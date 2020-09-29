@@ -7,9 +7,16 @@ jobs:
       - run: |
           sudo uname -a
           sudo lsb_release -a
+          
+  duration:
+    steps:
+      name: Determine job duration
+      command: |
           duration_ms=$(curl --location --request GET 'https://circleci.com/api/v2/project/gh/yaningo/chrome-version/${CIRCLE_BUILD_NUM}' --header 'Circle-Token: a5c83c30b32428e6e4df9968f089ad03a05c2ada' |jq -s '.[] |.duration')
           echo $duration_ms  
 workflows:
   build_and_test:
     jobs:
-      - build
+      - build:
+          post-steps:
+            - duration
