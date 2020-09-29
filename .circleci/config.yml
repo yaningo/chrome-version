@@ -4,13 +4,17 @@ jobs:
   parameters:
     autre_wf:
       type: string
+      default: blue
     autre_wf_2:
       type: string
+      default: blue
     token:
       type: string
+      default: blue
+      
   ruby_265:
     docker:
-    - image: circleci/ruby:2.6.5-stretch-node-browsers
+      - image: circleci/ruby:2.6.5-stretch-node-browsers
     steps:
       - run:
           command: |
@@ -25,7 +29,7 @@ jobs:
                    
   ruby_266:
     docker:
-    - image: circleci/ruby:2.6.6-stretch-node-browsers
+      - image: circleci/ruby:2.6.6-stretch-node-browsers
     steps:
       - run:
           background: true
@@ -57,7 +61,7 @@ workflows:
                 name: Cancel the other "on_hold_workflow"
                 command: |
                     #echo "export other_on_hold_id=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.status == "on_hold")|select(.id != $CIRCLE_WORKFLOW_ID)|.id')" >> $BASH_ENV
-                    curl -X POST "https://circleci.com/api/v2/workflow/<< parameters.autre_wf >>/cancel" -H "Circle-Token: <<parameters.token>>"
+                    curl -X POST "https://circleci.com/api/v2/workflow/<<parameters.autre_wf>>/cancel" -H "Circle-Token: <<parameters.token>>"
       
   build_266:
     jobs:
@@ -71,4 +75,4 @@ workflows:
                 name: Cancel the other "on_hold_workflow"
                 command: |
                     #echo "export other_on_hold_id=$(curl --G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.status == "on_hold")|select(.id != $CIRCLE_WORKFLOW_ID)|.id')" >> $BASH_ENV
-                    curl -X POST "https://circleci.com/api/v2/workflow/<< parameters.autre_wf_2 >>/cancel" -H "Circle-Token: <<parameters.token>>"
+                    curl -X POST "https://circleci.com/api/v2/workflow/<<parameters.autre_wf_2>>/cancel" -H "Circle-Token: <<parameters.token>>"
