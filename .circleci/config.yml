@@ -21,4 +21,4 @@ workflows:
                 command: |
                     echo $CIRCLE_BUILD_NUM
                     #curl -G "https://circleci.com/api/v2/project/gh/yaningo/chrome-version/job/$CIRCLE_BUILD_NUM" -H "Circle-Token: $MyToken" |jq -s '.[] |.duration'
-                    curl -G "https://circleci.com/api/v2/project/gh/yaningo/chrome-version/job/${CIRCLE_BUILD_NUM}" -H "Circle-Token: ${MyToken}"| jq -s '.[] |.duration'
+                    curl -G "https://circleci.com/api/v2/project/gh/yaningo/chrome-version/job/${CIRCLE_BUILD_NUM}" -H "Circle-Token: ${MyToken}"|jq '.[]'
