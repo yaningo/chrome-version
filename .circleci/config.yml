@@ -68,7 +68,7 @@ workflows:
             - ruby_266
       - get-other-wf-id:
           requires:
-            - hold265
+            - hold266
           post-steps:
             - run:
                 name: Cancelling the other "on_hold" workflow
