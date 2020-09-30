@@ -32,6 +32,21 @@ jobs:
                    curl -G "https://circleci.com/api/v2/workflow/${autre_wf_2}" -H "Circle-Token: $MyToken" | jq -s
                    
                    
+  cancel-on-hold: # defines a parameterized job
+    description: A job that just cancels a workflow
+    parameters:
+      other_wf:
+        type: string
+    docker:
+      - image: circleci/python
+    steps:
+      - run:
+          name: Cancelling the other on_hold workflow
+          command: |
+              other_on_hold_id=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg parameters.other_wf $parameters.other_wf '.[].items[]|select(.name == "<< parameters.other_wf >>")|.id')
+              curl -X POST "https://circleci.com/api/v2/workflow/$other_on_hold_id/cancel" -H "Circle-Token: $MyToken"
+              
+                   
 workflows:
   build_265:
     jobs:
@@ -40,13 +55,9 @@ workflows:
           type: approval
           requires:
             - ruby_265
-          post-steps:
-            - run:
-                name: Cancel the other "on_hold_workflow"
-                command: |
-                    other_on_hold_id=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.status == "on_hold")|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
-                    curl -X POST "https://circleci.com/api/v2/workflow/$other_on_hold_id/cancel" -H "Circle-Token: $MyToken"
-      
+      - cancel-on-hold:
+          other_wf: build_266
+                
   build_266:
     jobs:
       - ruby_266
@@ -54,9 +65,5 @@ workflows:
           type: approval
           requires:
             - ruby_266
-          post-steps:
-            - run:
-                name: Cancel the other "on_hold_workflow"
-                command: |
-                    other_on_hold_id=$(curl --G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.status == "on_hold")|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
-                    curl -X POST "https://circleci.com/api/v2/workflow/$other_on_hold_id/cancel" -H "Circle-Token: $MyToken"
+      - cancel-on-hold:
+          other_wf: build_265
