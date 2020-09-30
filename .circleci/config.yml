@@ -57,7 +57,7 @@ workflows:
                 name: Cancelling the other "on_hold" workflow
                 command: |
                     #other_on_hold_id=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.status == "on_hold")|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
-                    curl -X POST "https://circleci.com/api/v2/workflow/$other_on_hold_id/cancel" -H "Circle-Token: $MyToken"
+                    curl -X POST "https://circleci.com/api/v2/workflow/$other_on_hold_id/cancel" -H "Circle-Token: ${MyToken}"
       
   build_266:
     jobs:
@@ -74,4 +74,4 @@ workflows:
                 name: Cancelling the other "on_hold" workflow
                 command: |
                     #other_on_hold_id=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.status == "on_hold")|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
-                    curl -X POST "https://circleci.com/api/v2/workflow/$other_on_hold_id/cancel" -H "Circle-Token: $MyToken"
+                    curl -X POST "https://circleci.com/api/v2/workflow/$other_on_hold_id/cancel" -H "Circle-Token: ${MyToken}"
