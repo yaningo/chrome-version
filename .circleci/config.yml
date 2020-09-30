@@ -38,7 +38,7 @@ jobs:
       - run:
           name: Getting id of the other on_hold workflow
           command: |
-              other_on_hold_id=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg parameters.other_wf $parameters.other_wf '.[].items[]|select(.name == "<< parameters.other_wf >>")|.id')              
+              other_on_hold_id=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.status == "on_hold")|select(.id != $CIRCLE_WORKFLOW_ID)|.id')              
                                       
                    
 workflows:
