@@ -57,6 +57,8 @@ workflows:
             - ruby_265
       - cancel-on-hold:
           other_wf: build_266
+          requires:
+            - hold265
                 
   build_266:
     jobs:
@@ -67,3 +69,5 @@ workflows:
             - ruby_266
       - cancel-on-hold:
           other_wf: build_265
+          requires:
+            - hold266
