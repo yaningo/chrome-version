@@ -14,7 +14,10 @@ jobs:
             java -version
 
                    
-#workflows:
- # build_and_test:
-  #  jobs:
-   #   - build
+workflows:
+  build_and_test:
+    jobs:
+      - build
+          filters:
+            tags:
+              only: /.*/
