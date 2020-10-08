@@ -80,7 +80,7 @@ workflows:
                     echo $other_on_hold_id
                     curl -X POST "https://circleci.com/api/v2/workflow/${other_on_hold_id}/cancel" -H "Circle-Token: ${MyToken}"
                     
- parameters:
+parameters:
   run_workflow_265:
     default: true
     type: boolean
