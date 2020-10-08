@@ -43,7 +43,7 @@ jobs:
               echo "Hello Hello"    
 workflows:
   build_265:
-  when: << pipeline.parameters.run_workflow_265 >>
+    when: << pipeline.parameters.run_workflow_265 >>
     jobs:
       - ruby_265
       - hold265: # <<< A job that will require manual approval in the CircleCI web application.
@@ -62,7 +62,7 @@ workflows:
                     curl -X POST "https://circleci.com/api/v2/workflow/${other_on_hold_id}/cancel" -H "Circle-Token: ${MyToken}"
       
   build_266:
-  when: << pipeline.parameters.run_workflow_266 >>
+    when: << pipeline.parameters.run_workflow_266 >>
     jobs:
       - ruby_266
       - hold266: # <<< A job that will require manual approval in the CircleCI web application.
