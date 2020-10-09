@@ -19,6 +19,10 @@ jobs:
                    autre_wf=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
                    echo $autre_wf
                    curl -G "https://circleci.com/api/v2/workflow/$autre_wf" -H "Circle-Token: $MyToken" | jq -s
+      - unless:
+          condition: << parameters.custom_checkout >>
+          steps:
+            - run: echo "Toto is toto"
                    
                    
   ruby_266:
