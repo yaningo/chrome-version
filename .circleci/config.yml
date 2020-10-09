@@ -1,4 +1,4 @@
-version: 2.1
+version: 2
 
 jobs:
   ruby_265:
@@ -39,6 +39,7 @@ jobs:
               
                    
 workflows:
+  version: 2
   build_265:
     jobs:
       - ruby_265
