@@ -5,7 +5,7 @@ jobs:
     parameters:
       custom_checkout:
         type: boolean
-        default: true
+        default: false
     docker:
     - image: circleci/ruby:2.6.5-stretch-node-browsers
     steps:
