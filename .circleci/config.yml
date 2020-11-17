@@ -5,7 +5,7 @@ orbs:
 
 jobs:
   build:
-  docker:
+    docker:
       - image: circleci/android:api-29
     steps:    
       - run:
