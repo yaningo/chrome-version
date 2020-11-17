@@ -3,20 +3,18 @@ version: 2.1
 orbs:
   android: circleci/android@0.2.3
 
-machine:
-java:
-    version: 'oraclejdk8'
-
 jobs:
   build:
+  docker:
+      - image: circleci/android:api-29
     steps:    
       - run:
           name: Install OpenJDK 8 Yo yo
           command: |
             sudo alternatives --config java
-            #sudo apt-get update && sudo apt-get install openjdk-8-jdk
-            #sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/bin/java
-            #sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
+            sudo apt-get update && sudo apt-get install openjdk-8-jdk
+            sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/bin/java
+            sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
             java -version
                     
 workflows:
