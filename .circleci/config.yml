@@ -15,7 +15,7 @@ jobs:
             sudo sh -c 'echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" > /etc/apt/sources.list.d/webupd8team-java.list'
             sudo sh -c 'echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" > /etc/apt/sources.list.d/webupd8team-java.list'
             sudo apt-get update
-            sudo apt-get install oracle-java8-installer
+            sudo apt-get install oracle-java8-set-default
             java -version
                     
 workflows:
