@@ -5,8 +5,7 @@ orbs:
 
 jobs:
   build:
-    docker:
-      - image: circleci/android:api-29
+    machine: true
     steps:    
       - run:
           name: Install OpenJDK 8 Yo yo
