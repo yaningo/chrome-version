@@ -1,100 +1,27 @@
 version: 2.0
 
 jobs:
-  ruby_265:
-    parameters:
-      custom_checkout:
-        type: boolean
-        default: false
+  a32efb-image:
     docker:
-    - image: circleci/ruby:2.6.5-stretch-node-browsers
+      - image: circleci/ruby:3.0.2-node-browsers
     steps:
-      - when:
-          condition: <<parameters.custom_checkout>>
-          steps:
-            - run:
-                command: |
-                   google-chrome --version
-                   #dockerize -wait tcp://localhost:9515 -timeout 1m
-                   autre_wf=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
-                   echo $autre_wf
-                   curl -G "https://circleci.com/api/v2/workflow/$autre_wf" -H "Circle-Token: $MyToken" | jq -s
-      - unless:
-          condition: << parameters.custom_checkout >>
-          steps:
-            - run: echo "Toto is toto"
-                   
-                   
-  ruby_266:
+      - run: google-chrome --version
+         
+  b435f8-image:
     docker:
-    - image: circleci/ruby:2.6.6-stretch-node-browsers
+      - image: circleci/ruby:3.0.2-node-browsers-legacy
     steps:
-      - run:
-          background: true
-          name: Launching ChromeDriver
-          command: chromedriver
-                   
-      - run:
-          command: |
-                   dockerize -wait tcp://localhost:9515 -timeout 1m
-                   google-chrome --version
-                   autre_wf_2=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
-                   echo $autre_wf_2
-                   curl -G "https://circleci.com/api/v2/workflow/${autre_wf_2}" -H "Circle-Token: $MyToken" | jq -s
-                   
-  get-other-wf-id: # defines a parameterized job
-    docker:
-      - image: circleci/python
-    steps:
-      - run:
-          name: Getting id of the other on_hold workflow
-          command: |
-              #other_on_hold_id=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.status == "on_hold")|select(.id != $CIRCLE_WORKFLOW_ID)|.id')              
-              #echo $other_on_hold_id         
-              echo "Hello Hello"    
-workflows:
-  build_265:
-    when: << pipeline.parameters.run_workflow_265 >>
-    jobs:
-      - ruby_265
-      - hold265: # <<< A job that will require manual approval in the CircleCI web application.
-          type: approval
-          requires:
-            - ruby_265
-      - get-other-wf-id:
-          requires:
-            - hold265
-          post-steps:
-            - run:
-                name: Cancelling the other "on_hold" workflow
-                command: |
-                    other_on_hold_id=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.status == "on_hold")|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
-                    echo $other_on_hold_id
-                    curl -X POST "https://circleci.com/api/v2/workflow/${other_on_hold_id}/cancel" -H "Circle-Token: ${MyToken}"
+      - run: google-chrome --version
       
-  build_266:
-    when: << pipeline.parameters.run_workflow_266 >>
-    jobs:
-      - ruby_266
-      - hold266: # <<< A job that will require manual approval in the CircleCI web application.
-          type: approval
-          requires:
-            - ruby_266
-      - get-other-wf-id:
-          requires:
-            - hold266
-          post-steps:
-            - run:
-                name: Cancelling the other "on_hold" workflow
-                command: |
-                    other_on_hold_id=$(curl -G "https://circleci.com/api/v2/pipeline/<<pipeline.id>>/workflow" -H "Circle-Token: $MyToken"|jq -rs --arg CIRCLE_WORKFLOW_ID "$CIRCLE_WORKFLOW_ID" '.[].items[]|select(.status == "on_hold")|select(.id != $CIRCLE_WORKFLOW_ID)|.id')
-                    echo $other_on_hold_id
-                    curl -X POST "https://circleci.com/api/v2/workflow/${other_on_hold_id}/cancel" -H "Circle-Token: ${MyToken}"
-                    
-parameters:
-  run_workflow_265:
-    default: true
-    type: boolean
-  run_workflow_266:
-    default: true
-    type: boolean
+  3ab54c-image:
+    docker:
+      - image: circleci/ruby@sha256:b9b513f217c74f1f3d5940a9351ca4ac39b7663bffd13368fa972175f83ab54c
+    steps:
+      - run: google-chrome --version
+      
+      
+workflows:
+  jobs:
+    - a32efb-image
+    - b435f8-image
+    - 3ab54c-image
