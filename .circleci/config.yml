@@ -21,7 +21,8 @@ jobs:
       
       
 workflows:
-  jobs:
-    - a32efb-image
-    - b435f8-image
-    - 3ab54c-image
+  my-test:
+    jobs:
+      - a32efb-image
+      - b435f8-image
+      - 3ab54c-image
