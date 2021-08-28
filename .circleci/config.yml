@@ -1,19 +1,19 @@
 version: 2.1
 
 jobs:
-  a32efb-image:
+  first-a32efb-image:
     docker:
       - image: circleci/ruby:3.0.2-node-browsers
     steps:
       - run: google-chrome --version
          
-  b435f8-image:
+  second-b435f8-image:
     docker:
       - image: circleci/ruby:3.0.2-node-browsers-legacy
     steps:
       - run: google-chrome --version
       
-  3ab54c-image:
+  third-3ab54c-image:
     docker:
       - image: circleci/ruby@sha256:b9b513f217c74f1f3d5940a9351ca4ac39b7663bffd13368fa972175f83ab54c
     steps:
@@ -23,6 +23,6 @@ jobs:
 workflows:
   my-test:
     jobs:
-      - a32efb-image
-      - b435f8-image
-      - 3ab54c-image
+      - first-a32efb-image
+      - second-b435f8-image
+      - third-3ab54c-image
