@@ -1,42 +1,28 @@
 version: 2.1
 
+orbs:
+    browser-tools: circleci/browser-tools@1.1.3
+    
 commands:
-  sayhello:
-    description: "A very simple command for demonstration purposes"
-    parameters:
-      to:
-        type: string
-    steps:
-      - run:
-          name: sayhello << parameters.to >>
-          command: |
-            echo Hello << parameters.to >>
-            
-      - run:
-          name: Bien << parameters.to >>
-          command: |
-            echo Alors << parameters.to >>
+    install_chrome_browser:
+      description: Reusable command to handle Chrome browser install
+        steps:
+          - browser-tools/install-browser-tools:
+              chrome-version: latest
+              install-chromedriver: true
+              install-firefox: false
+              install-geckodriver: false
+          - run: npm install chromedriver --detect_chromedriver_version
 
 jobs:
   myjob:
-    parameters:
-      to:
-        description: "To whom shall we say hello?"
-        type: string
     docker:
-      - image: "cimg/base:stable"
+      - image: cimg/node:14.18-browsers
     steps:
-      - sayhello: # invoke command "sayhello"
-          to: << parameters.to >>
+      - install_chrome_browser
 
 workflows:
   build-toto:
     jobs:
-      - myjob:
-          to: Toto
-          
-  build-titi:
-    jobs:
-      - myjob:
-          to: Titi
+      - myjob
       
