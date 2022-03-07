@@ -4,15 +4,15 @@ orbs:
     browser-tools: circleci/browser-tools@1.1.3
     
 commands:
-    install_chrome_browser:
-      description: Reusable command to handle Chrome browser install
-        steps:
-          - browser-tools/install-browser-tools:
-              chrome-version: latest
-              install-chromedriver: true
-              install-firefox: false
-              install-geckodriver: false
-          - run: npm install chromedriver --detect_chromedriver_version
+  install_chrome_browser:
+    description: Reusable command to handle Chrome browser install
+    steps:
+      - browser-tools/install-browser-tools:
+          chrome-version: latest
+          install-chromedriver: true
+          install-firefox: false
+          install-geckodriver: false
+      - run: npm install chromedriver --detect_chromedriver_version
 
 jobs:
   myjob:
