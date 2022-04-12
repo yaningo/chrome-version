@@ -8,7 +8,7 @@ jobs:
     docker:
       - image: cimg/ruby:3.0.3-browsers
     steps:
-      - browser-tools/install-chrome: { chrome-version: 92.0.4515.159 }
+      - browser-tools/install-chrome
 
 workflows:
   main:
