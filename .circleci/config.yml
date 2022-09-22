@@ -7,7 +7,7 @@ jobs:
       xcode: 12.5.1
     resource_class: large
     steps:
-      - run: echo: Hello
+      - run: echo Hello
 
 workflows:
   main:
