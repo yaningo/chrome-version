@@ -1,14 +1,13 @@
 version: 2.1
 
-orbs: 
-  browser-tools: circleci/browser-tools@1.2.5
 
 jobs:
   test:
-    docker:
-      - image: cimg/ruby:3.0.3-browsers
+    macos:
+      xcode: 12.5.1
+    resource_class: large
     steps:
-      - browser-tools/install-chrome
+      - run: echo: Hello
 
 workflows:
   main:
