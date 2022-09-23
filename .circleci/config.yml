@@ -1,13 +1,16 @@
 version: 2.1
 
+parameters:
+  switch:
+    type: string
+    default: NoSecret
 
 jobs:
   test:
-    macos:
-      xcode: 12.5.1
-    resource_class: large
+    docker:
+      - image: cimg/base:2022.09
     steps:
-      - run: echo Hello
+      - run: echo ${!<< pipeline.parameters.switch >>}
 
 workflows:
   main:
