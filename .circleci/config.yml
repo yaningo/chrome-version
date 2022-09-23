@@ -10,7 +10,7 @@ jobs:
     docker:
       - image: cimg/base:2022.09
     steps:
-      - run: echo ${!<< pipeline.parameters.switch >>}
+      - run: echo ${<< pipeline.parameters.switch >>}
 
 workflows:
   main:
