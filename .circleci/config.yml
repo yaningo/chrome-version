@@ -1,16 +1,11 @@
 version: 2.1
 
-parameters:
-  switch:
-    type: string
-    default: NoSecret
-
 jobs:
   test:
-    docker:
-      - image: cimg/base:2022.09
+    machine:
+      image: ubuntu-2004:202010-01
     steps:
-      - run: echo ${<< pipeline.parameters.switch >>}
+      - run: sudo mkdir /canton
 
 workflows:
   main:
