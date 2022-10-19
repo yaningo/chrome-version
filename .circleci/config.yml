@@ -7,7 +7,7 @@ jobs:
       resource_class: windows.medium
       shell: powershell.exe -ExecutionPolicy Bypass
     steps:
-      - run: ls
+      - run: commandthatnoexist
 
 workflows:
   main:
