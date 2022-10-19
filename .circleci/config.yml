@@ -3,7 +3,8 @@ version: 2.1
 jobs:
   test:
     machine:
-      image: windows-server-2022-gui:current
+      image: 'windows-server-2022-gui:current'
+      resource_class: windows.medium
       shell: powershell.exe -ExecutionPolicy Bypass
     steps:
       - run: ls
