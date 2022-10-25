@@ -1,20 +1,11 @@
 version: 2.1
-
-jobs:
-  build:
-    machine: true
-    steps:
-      - run: |
-          sudo uname -a
-          sudo lsb_release -a
-          
 workflows:
-  build_and_test:
+  testing:
     jobs:
-      - build:
-          post-steps:
-            - run:
-                name: Determine job duration
-                command: |
-                    echo $CIRCLE_BUILD_NUM
-                    curl -G "https://circleci.com/api/v2/project/gh/yaningo/chrome-version/job/$CIRCLE_BUILD_NUM" -H "Circle-Token: $MyToken" |jq -s '.[] |.duration'
+      - runner-test
+jobs:
+  runner-test:
+    machine: true
+    resource_class: yaningo/macbook
+    steps:
+      - run: echo "Hi I'm on Runners!"
