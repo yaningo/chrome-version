@@ -8,4 +8,4 @@ jobs:
     machine: true
     resource_class: yaningo/macbook
     steps:
-      - run: echo "Hi I'm on a macOS CircleCI Runner!"
+      - run: echo "Hi I'm on a macOS CircleCI Runner! Yay!"
