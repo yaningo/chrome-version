@@ -1,15 +1,48 @@
 version: 2.1
 
-jobs:
-  test:
-    machine:
-      image: 'windows-server-2022-gui:current'
-      resource_class: windows.medium
-      shell: powershell.exe -ExecutionPolicy Bypass
+commands:
+  print_env_var:
+    description: Print env var passed as parameter
+    parameters:
+      variable_name:
+        type: env_var_name
+        default: TOTO
     steps:
-      - run: commandthatnoexist
+      - checkout
+      - run:
+          name: Run a script with python to print the value of an environment variable
+          shell: /usr/bin/env python3
+          # https://yaml-multiline.info/
+          command: >+
+            import os
 
+            print(os.environ['<< parameters.variable_name >>'])
+      - run: echo "Hello"
+jobs:
+  run-first-script:
+    docker:
+      - image: cimg/python:3.10
+    resource_class: small
+    environment:
+      ENV_VAR_1: 'hello, world!'
+    steps:
+      - print_env_var:
+          variable_name: ENV_VAR_1
+          
+  run-second-script:
+    docker:
+      - image: cimg/python:3.10
+    resource_class: small
+    environment:
+      ENV_VAR_2: 'foo, bar!'
+    steps:
+      - print_env_var:
+          variable_name: ENV_VAR_2
+          
 workflows:
-  main:
+  my-workflow:
     jobs:
-      - test
+      - run-first-script
+      - run-second-script:
+          requires:
+            - run-first-script
