@@ -2,13 +2,12 @@ version: 2.1
 workflows:
   testing:
     jobs:
-      - test
+      - runner-test
 jobs:
-  test:
-    machine:
-      image: ubuntu-2004:2022.10.1
+  runner-test:
+    machine: true
+    resource_class: yaningo/ubuntu-1804
     steps:
       - run: |
-          node --version
-          java --version
-          google-chrome --version
+          echo "Hi I'm on Runners!"
+          echo "My IP is $(curl -s https://checkip.amazonaws.com/)"
