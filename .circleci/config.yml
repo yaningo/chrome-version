@@ -3,7 +3,8 @@ version: 2.1
 jobs:
   instruqt-push:
     docker:
-      - image: instruqt/cli:2056-101804d
+      - image: instruqt/cli:latest
+    entrypoint: /bin/bash
     steps:
       - checkout
       - run: instruqt version
