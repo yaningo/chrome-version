@@ -12,3 +12,4 @@ jobs:
           node --version
           java --version
           google-chrome --version
+          echo "Toto"
