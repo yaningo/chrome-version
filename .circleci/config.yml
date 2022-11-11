@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   who-me:
     machine:
-      ubuntu-2204:2022.10.1
+      image: ubuntu-2204:2022.10.1
     steps:
       - run: whoami
 
