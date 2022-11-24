@@ -1,4 +1,7 @@
 version: 2.1
+
+orbs:
+  wireguard: orbiously/wireguard@1.0.0
 workflows:
   testing:
     jobs:
@@ -8,8 +11,4 @@ jobs:
     machine:
       image: ubuntu-2004:2022.10.1
     steps:
-      - run: |
-          node --version
-          java --version
-          google-chrome --version
-          echo "Toto"
+      - wireguard/setup
