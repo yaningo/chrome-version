@@ -1,4 +1,5 @@
 version: 2.1
+
 jobs:
   mysql-check:
     docker:
@@ -8,9 +9,9 @@ jobs:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_ROOT_PASSWORD: ''
           max_allowed_packet: 32M
+
     steps:
       - run:
-      # Our primary container isn't MYSQL so run a sleep command until it's ready.
           name: Waiting for MySQL to be ready
           command: |
             for i in `seq 1 10`;
@@ -26,7 +27,7 @@ jobs:
           command: |
             mysql -h 127.0.0.1 -u root --execute="SHOW VARIABLES LIKE 'max_allowed_packet';"
   
-  workflows:
-    lewkflw:
-      jobs:
-        - mysql-check
+workflows:
+  lewkflw:
+    jobs:
+      - mysql-check
