@@ -2,12 +2,12 @@ version: 2.1
 jobs:
   mysql-check:
     docker:
-    - image: circleci/mysql:5.7
-      environment:
-        MYSQL_USER: root
-        MYSQL_ALLOW_EMPTY_PASSWORD: yes
-        MYSQL_ROOT_PASSWORD: ''
-        max_allowed_packet: 32M
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_ROOT_PASSWORD: ''
+          max_allowed_packet: 32M
     steps:
       - run:
       # Our primary container isn't MYSQL so run a sleep command until it's ready.
@@ -22,10 +22,10 @@ jobs:
             echo Failed waiting for MySQL && exit 1
             
       - run:
-          name: Install MySQL CLI; Import dummy data; run an example query
+          name: run query to check variable value
           command: |
             mysql -h 127.0.0.1 -u root --execute="SHOW VARIABLES LIKE 'max_allowed_packet';"
   
   workflows:
     jobs:
-    - mysql-check
+      - mysql-check
