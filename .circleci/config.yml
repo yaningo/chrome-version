@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   mysql-check:
     docker:
-      - image: cimg/php:8.1-browsers
+      - image: circleci/openjdk:11.0.3-jdk-stretch
         environment:
           MYSQL_USER: root
       - image: circleci/mysql:5.7
@@ -13,6 +13,9 @@ jobs:
           max_allowed_packet: 32M
 
     steps:
+      - run:
+          name: Check Linux distrib
+          command: lsb_release -a
       - run:
           name: Waiting for MySQL to be ready
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
