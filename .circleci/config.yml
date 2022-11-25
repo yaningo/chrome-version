@@ -4,9 +4,10 @@ jobs:
   mysql-check:
     docker:
       - image: cimg/php:8.1-browsers
-      - image: circleci/mysql:5.7
         environment:
           MYSQL_USER: root
+      - image: circleci/mysql:5.7
+        environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_ROOT_PASSWORD: ''
           max_allowed_packet: 32M
