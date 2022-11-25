@@ -11,9 +11,9 @@ jobs:
           max_allowed_packet: 32M
 
     steps:
-      - run:
-          name: Waiting for MySQL to be ready
-          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+#       - run:
+#           name: Waiting for MySQL to be ready
+#           command: dockerize -wait tcp://localhost:3306 -timeout 1m
 
       - run:
           name: run query to check variable value
