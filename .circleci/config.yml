@@ -6,10 +6,12 @@ jobs:
       - image: circleci/openjdk:11.0.3-jdk-stretch
         environment:
           MYSQL_USER: root
+          
       - image: circleci/mysql:5.7
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_ROOT_PASSWORD: ''
+        command: mysqld --max_allowed_packet=16M
 
     steps:
       - run:
@@ -24,7 +26,7 @@ jobs:
       - run:
           name: Set and check variable value
           command: |
-            mysql --max_allowed_packet=32M -h 127.0.0.1 -u root --execute="SHOW VARIABLES LIKE 'max_allowed_packet';"
+            mysql -h 127.0.0.1 -u root --execute="SHOW VARIABLES LIKE 'max_allowed_packet';"
   
 workflows:
   lewkflw:
