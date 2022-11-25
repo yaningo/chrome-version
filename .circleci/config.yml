@@ -10,7 +10,6 @@ jobs:
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_ROOT_PASSWORD: ''
-          max_allowed_packet: 32M
 
     steps:
       - run:
@@ -21,7 +20,11 @@ jobs:
           name: Install MySQL CLI and run query to check variable value
           command: |
             sudo apt-get update && sudo apt-get install default-mysql-client
-            mysql -h 127.0.0.1 -u root --execute="SHOW VARIABLES LIKE 'max_allowed_packet';"
+
+      - run:
+          name: Set and check variable value
+          command: |
+            mysql --max_allowed_packet=32M -h 127.0.0.1 -u root --execute="SHOW VARIABLES LIKE 'max_allowed_packet';"
   
 workflows:
   lewkflw:
