@@ -27,5 +27,6 @@ jobs:
             mysql -h 127.0.0.1 -u root --execute="SHOW VARIABLES LIKE 'max_allowed_packet';"
   
   workflows:
-    jobs:
-      - mysql-check
+    lewkflw:
+      jobs:
+        - mysql-check
