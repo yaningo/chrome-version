@@ -20,7 +20,7 @@ jobs:
       - run:
           name: Install MySQL CLI and run query to check variable value
           command: |
-            sudo apt-get install default-mysql-client
+            sudo apt-get update && sudo apt-get install default-mysql-client
             mysql -h 127.0.0.1 -u root --execute="SHOW VARIABLES LIKE 'max_allowed_packet';"
   
 workflows:
