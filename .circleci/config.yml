@@ -11,7 +11,7 @@ jobs:
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_ROOT_PASSWORD: ''
-        command: mysqld --max_allowed_packet=16M
+        command: mysqld --max_allowed_packet=1G
 
     steps:
       - run:
