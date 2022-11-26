@@ -14,9 +14,9 @@ jobs:
         command: mysqld --max_allowed_packet=1G
 
     steps:
-      - run:
-          name: Waiting for MySQL to be ready
-          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+#       - run:
+#           name: Waiting for MySQL to be ready
+#           command: dockerize -wait tcp://localhost:3306 -timeout 1m
 
       - run:
           name: Install MySQL CLI and run query to check variable value
