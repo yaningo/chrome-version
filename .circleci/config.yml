@@ -3,11 +3,11 @@ version: 2.1
 jobs:
   mysql-check:
     docker:
-      - image: circleci/openjdk:11.0.3-jdk-stretch
+      - image: cimg/base:2022.10
         environment:
           MYSQL_USER: root
           
-      - image: circleci/mysql:5.7
+      - image: cimg/mysql:8.0
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_ROOT_PASSWORD: ''
