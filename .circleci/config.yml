@@ -12,4 +12,4 @@ jobs:
           echo "Hi I'm on Runners!"
           echo "My IP is $(curl -s https://checkip.amazonaws.com/)"
           
-      - run: echo "Go on Tines, do your thing! Yup yup"
+      - run: echo "Go go! Yup yup!"
