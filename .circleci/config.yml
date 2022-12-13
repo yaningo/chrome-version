@@ -2,7 +2,10 @@ version: 2.1
 workflows:
   testing:
     jobs:
-      - runner-test
+      - runner-test:
+          filters:
+            tags:
+              only: /.*/
 jobs:
   runner-test:
     machine: true
