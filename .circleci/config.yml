@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
 #       - run: sudo bash -c 'echo "test" > /home/circleci/.npm/_cacache/content-v2/sha512/f7/57/cd9687cd8b02ff4a4f45da9f085d18edab30824e1dc492452f8777d4c9a476b7b66f2b450a4d784b5cf326c5044c3f50338b1fd7bb19dd55a5df8e708661'
-      - run: rm -fR /home/circleci/.npm/
+      - run: sudo chmod -R u+w /home/circleci/.npm/*
       - restore_cache:
           keys:
             - my-cache-v2
