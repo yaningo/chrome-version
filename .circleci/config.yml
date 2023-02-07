@@ -12,7 +12,7 @@ jobs:
     resource_class: yaningo/ubuntu-1804
     steps:
       - run: |
-          echo "Hi I'm on Runners!"
+          echo "Hi I'm on Runnersssss!"
           echo "My IP is $(curl -s https://checkip.amazonaws.com/)"
           
       - run: echo "Go go! Yup yup!"
