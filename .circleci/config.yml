@@ -1,28 +1,19 @@
 version: 2.1
 
 jobs:
-  first-a32efb-image:
+  build:
     docker:
-      - image: circleci/ruby:3.0.2-node-browsers
+      - image: cimg/base:edge #public.ecr.aws/eks-distro/kubernetes/pause:3.6
     steps:
-      - run: google-chrome --version
-         
-  second-b435f8-image:
-    docker:
-      - image: circleci/ruby:3.0.2-node-browsers-legacy
-    steps:
-      - run: google-chrome --version
-      
-  third-3ab54c-image:
-    docker:
-      - image: circleci/ruby@sha256:b9b513f217c74f1f3d5940a9351ca4ac39b7663bffd13368fa972175f83ab54c
-    steps:
-      - run: google-chrome --version
-      
-      
+      - setup_remote_docker:
+          version: 20.10.6
+          docker_layer_caching: true
+      - checkout
+      - run: docker run --name web-server -p 80:80 -d nginx:stable-alpine
+      - run: docker network ls
+      - run: docker network inspect bridge
+
 workflows:
-  my-test:
+  workflow1:
     jobs:
-      - first-a32efb-image
-      - second-b435f8-image
-      - third-3ab54c-image
+      - build
