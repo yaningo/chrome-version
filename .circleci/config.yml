@@ -15,5 +15,5 @@ jobs:
     # resource_class: yaningo/macbook
     steps:
       - run: ruby -v
-      - switch-ruby:
+      - macos/switch-ruby:
           version: 3.2.2
