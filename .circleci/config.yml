@@ -17,3 +17,4 @@ jobs:
       - run: ruby -v
       - macos/switch-ruby:
           version: 3.2.2
+      - run: ruby -v
