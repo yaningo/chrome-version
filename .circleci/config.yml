@@ -15,6 +15,7 @@ jobs:
     # resource_class: yaningo/macbook
     steps:
       - run: ruby -v
+      - run: brew install ruby@3.2.2
       - macos/switch-ruby:
           version: 3.2.2
       - run: ruby -v
