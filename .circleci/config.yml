@@ -17,5 +17,5 @@ jobs:
       - run: ruby -v
       - run: brew install ruby
       - macos/switch-ruby:
-          version: 3.2.2
+          version: 3.2
       - run: ruby -v
