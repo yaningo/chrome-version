@@ -10,7 +10,7 @@ workflows:
 jobs:
   runner-test:
     macos:
-      xcode: 14.1.0
+      xcode: 14.3.1
     # machine: true
     # resource_class: yaningo/macbook
     steps:
@@ -20,5 +20,5 @@ jobs:
       #     #brew install ruby
       #     #echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> /Users/distiller/.bash_profile
       - macos/switch-ruby:
-          version: "3.1.2"
+          version: "3.2.2"
       - run: ruby -v
