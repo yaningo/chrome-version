@@ -16,8 +16,9 @@ jobs:
     steps:
       - run: ruby -v
       - run: |
-          brew install ruby
-          echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> /Users/distiller/.bash_profile
+          ruby-install ruby 3.2
+          #brew install ruby
+          #echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> /Users/distiller/.bash_profile
       - macos/switch-ruby:
           version: "3.2"
       - run: ruby -v
