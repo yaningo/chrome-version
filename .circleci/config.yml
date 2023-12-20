@@ -1,11 +1,19 @@
 version: 2.1
+
+orbs:
+  macos: circleci/macos@2.4.1
+
 workflows:
   testing:
     jobs:
       - runner-test
 jobs:
   runner-test:
-    machine: true
-    resource_class: yaningo/macbook
+    macos:
+      xcode: 14.1.0
+    # machine: true
+    # resource_class: yaningo/macbook
     steps:
-      - run: echo "Hi I'm on a macOS CircleCI Runner! Yay"
+      - run: ruby -v
+      - switch-ruby:
+          version: 3.2.2
