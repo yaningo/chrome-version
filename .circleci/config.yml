@@ -16,7 +16,7 @@ jobs:
     steps:
       - run: ruby -v
       - run: |
-          ruby-install ruby 3.2
+          HOMEBREW_NO_AUTO_UPDATE=1 ruby-install ruby 3.2
           #brew install ruby
           #echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> /Users/distiller/.bash_profile
       - macos/switch-ruby:
